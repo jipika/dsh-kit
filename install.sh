@@ -4,7 +4,17 @@
 # 幂等：重复执行只补缺失项，不覆盖你已有的版本与配置。
 set -euo pipefail
 
+# ── 参数 ─────────────────────────────────────────────────────────────────────
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+  sed -n '2,5p' "${BASH_SOURCE[0]}"
+  exit 0
+fi
 PROFILE="${1:-desktop}"
+if ! printf '%s' "$PROFILE" | grep -qE '^[A-Za-z0-9][A-Za-z0-9_-]*$'; then
+  echo "✗ 非法 profile 名：$PROFILE（只允许字母/数字/下划线/连字符）" >&2
+  echo "  用法：./install.sh [profile]（默认 desktop）" >&2
+  exit 1
+fi
 KIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DSH_HOME="${DSH_HOME:-$HOME/.dsh}"
 TGT="$DSH_HOME/profiles/$PROFILE"
