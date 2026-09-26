@@ -1,0 +1,101 @@
+# dsh-kit patch layer — applied after every bundle layer of this profile.
+# install.sh 会把本文件里你 profile 尚缺的条目逐块追加（幂等，重复跑不会重复添加）。
+#
+# ⚠️ 双挂载警告：dsh-infinite-gen-4 与 @jipika/dsh-memory 已在 package.json 的
+# dsh.profile.bundles 里（走 bundle 通道，包自带同 id 的 cordis.patch.yml）。
+# **不要**再在这里手动 insert 它们 —— 两处同 id 会撞 `duplicate loader entry id`，
+# 整个 plugin tree 在 include 阶段就起不来。
+
+# ── LAN loopback 兼容（防全局客户端升级移除）─────────────────────────────────
+- insert:
+    - id: dsh-lan-loopback-compat
+      name: dsh-lan-loopback-compat
+
+# ── 官方 Computer Use（三个包都没有 dsh.bundle，必须 insert）──────────────────
+# compat 必须排在 computer-use 之前：旧宿主 core 的 SECTION_ORDERS 缺少
+# TOOL_COMPUTER_USE 键，native provider 取 order 为 undefined 时会整体回滚。
+- insert:
+    - id: dsh-computer-use-compat
+      name: 'dsh-computer-use-compat'
+    - id: computer-use
+      name: '@deepseek-ai/dsh-computer-use'
+    - id: computer-use-native
+      name: '@deepseek-ai/dsh-experimental-computer-use-cua-driver-native'
+
+# ── 官方 Browser Use（Playwright MCP provider）────────────────────────────────
+# Electron 宿主下 MCP 子进程起不来会拖垮会话创建，故禁用（CLI/web 宿主可打开）。
+- insert:
+    - id: browser-use
+      name: '@deepseek-ai/dsh-browser-use'
+    - id: browser-use-playwright-mcp
+      disabled: true
+      name: '@deepseek-ai/dsh-experimental-browser-use-playwright-mcp'
+      config:
+        mode: launch
+        headless: true
+
+# ── 官方 Schedule（官方 web-app patch 里 ui-schedule 默认 disabled，需一起打开）──
+- insert:
+    - id: time-context
+      name: '@deepseek-ai/dsh-time-context'
+    - id: schedule
+      name: '@deepseek-ai/dsh-schedule'
+- id: ui-schedule
+  disabled: false
+
+# ── 本地/自研插件挂载 ─────────────────────────────────────────────────────────
+- insert:
+    - id: todo-float
+      name: 'dsh-todo-float'
+- insert:
+    - id: claude-theme
+      name: 'dsh-claude-theme'
+- insert:
+    - id: dsh-workspace-files
+      name: '@jipika/dsh-workspace-files'
+- insert:
+    - id: dsh-plugin-polish
+      name: 'dsh-plugin-polish'
+- insert:
+    - id: dsh-plugin-github-code-theme
+      name: 'dsh-plugin-github-code-theme'
+- insert:
+    - id: dsh-proxy-autoswitch
+      name: dsh-proxy-autoswitch
+      config:
+        enabled: true
+        intervalMs: 20000
+        probeTimeoutMs: 1500
+- insert:
+    - id: dsh-memguard
+      name: dsh-memguard
+
+# ── 插件配置覆盖 ─────────────────────────────────────────────────────────────
+# save-token：compaction assist 钉死为关（提前压缩会话极不划算，见上游 v2.3.0 说明）
+- id: save-token
+  config:
+    compactAssistEnabled: false
+
+# config-manager：让它管理当前 profile（缺省只管 web）。install.sh 会把下面的
+# desktop 替换成你实际的目标 profile 名。
+- id: config-manager
+  config:
+    profile: desktop
+
+# plugin-console（改版）：在设置窗口左侧导航出现「插件中心」独立分栏
+- id: plugin-console
+  disabled: false
+
+# 无限四代：注入总开关（详细配置在插件的 settings 命名空间里）
+- id: dsh-infinite-gen-4
+  name: dsh-infinite-gen-4
+  config:
+    enabled: true
+
+# ── 未包含、需要按本机情况自行添加的 ──────────────────────────────────────────
+# · ego-browser：需要按本机浏览器指定 chromePath，例如
+#     - id: ego-browser
+#       config:
+#         chromePath: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+# · 模型 providers / 默认模型 / 权限预设 / UI 偏好：属于个人配置，请自行在
+#   设置界面配置，不要照抄别人的 patch。

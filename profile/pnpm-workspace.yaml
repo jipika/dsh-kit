@@ -1,0 +1,28 @@
+packages:
+  - .
+# pnpm 11 用 allowBuilds 取代旧的 onlyBuiltDependencies（旧键在 v11 会被忽略，
+# 导致 node-pty 的 install/postinstall 不执行、prebuilds/spawn-helper 丢失可执行位，
+# better-sidebar 的终端会起不来）。两个键都保留，兼容 pnpm 10/11。
+nodeLinker: hoisted
+autoInstallPeers: false
+allowBuilds:
+  protobufjs: true
+  node-pty: true
+  dsh-better-sidebar: true
+onlyBuiltDependencies:
+  - dsh-better-sidebar
+  - node-pty
+# 个人开发机：装/卸什么完全自己可控。minimumReleaseAge（发布满 N 分钟才可装）
+# 连续卡住安装与卸载（ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION，连 exclude 列表
+# 里的带版本条目都被拦），直接置 0 关闭整条策略。若将来要重新启用，删掉下面
+# 这行即可，exclude 名单仍保留作参考。
+minimumReleaseAge: 0
+minimumReleaseAgeExclude:
+  - '@codemirror/state@6.7.6'
+  - '@codemirror/view@6.43.13'
+  - dsh-context@0.54.4
+  - '@michengai/dsh-archive-manager@1.0.4'
+  - '@michengai/dsh-automation@0.1.50'
+  - '@huanlin/dsh-plugin-yet-another-subagent@0.4.5'
+  - '@michengai/dsh-archive-manager@1.0.5'
+  - '@michengai/dsh-automation@0.1.51'
