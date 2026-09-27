@@ -45,9 +45,23 @@ if [ -z "$PNPM" ]; then
   echo "✗ 找不到 pnpm。请 npm i -g pnpm，或确认 DeepSeek Harness Desktop 已安装。" >&2
   exit 1
 fi
+# pnpm 的入口有两种形态：系统装的（带 node shebang 的 JS）与 `$DSH_HOME/bin/pnpm`
+# 这类**软链** —— 软链自身名字不带 `.cjs`，但目标仍是 JS 文件。
+# 只看扩展名会漏判软链：实测直接执行软链会以 "Permission denied" 收场（目标
+# `pnpm.cjs` 是 0644，没有执行位）。改成读 shebang：含 node 就用探测到的 node 跑。
 run_pnpm() {
-  if [[ "$PNPM" == *.cjs ]]; then "$NODE" "$PNPM" "$@"; else "$PNPM" "$@"; fi
+  if head -1 "$PNPM" 2>/dev/null | grep -q node; then
+    "$NODE" "$PNPM" "$@"
+  else
+    "$PNPM" "$@"
+  fi
 }
+# postinstall 链是 `node scripts/patch-*.cjs` —— pnpm 起子进程时靠 **PATH** 找 node。
+# 而探测到的 node 往往在 PATH 之外（典型的 `$DSH_HOME/bin/node`，Desktop 自带运行时），
+# 不补 PATH 的话 postinstall 会以 `sh: node: command not found` → `[ELIFECYCLE] Command
+# failed` 收场，**所有补丁静默不生效**（实测踩到）。这里把它的目录前置进 PATH。
+export PATH="$(dirname "$NODE"):$PATH"
+
 echo "    node = $NODE"
 echo "    pnpm = $PNPM"
 
