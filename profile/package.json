@@ -29,6 +29,7 @@
     "dsh-plugin-github-code-theme": "github:jipika/dsh-plugin-github-code-theme",
     "dsh-plugin-polish": "github:jipika/dsh-plugin-polish",
     "dsh-plugin-save-token": "^2.4.1",
+    "dsh-preset-hotswap": "github:jipika/dsh-preset-hotswap",
     "dsh-rewind-plugin": "0.14.0-beta.2",
     "dsh-skill-mcp-panel": "github:jipika/dsh-skill-mcp-panel",
     "dsh-smooth-cursor": "^0.1.9",

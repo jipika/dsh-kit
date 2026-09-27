@@ -70,6 +70,15 @@
     - id: dsh-memguard
       name: dsh-memguard
 
+# ── 会话模式热切换（dsh-preset-hotswap）──────────────────────────────────────
+# 在会话头部官方模式徽标旁加一个下拉，**已经开始的会话也能切** 标准 / PTC / 创造。
+# host 半边经 /dsh-preset-hotswap 暴露名单(GET)与切换(POST)；轮次进行中拒切。
+# 它没有 dsh.bundle 声明，靠本 insert 挂载（bundles 列表里不需要加）。
+# 回滚：删掉本块 + package.json 的依赖行，完全重启应用。
+- insert:
+    - id: preset-hotswap
+      name: dsh-preset-hotswap
+
 # ── 插件配置覆盖 ─────────────────────────────────────────────────────────────
 # save-token：compaction assist 钉死为关（提前压缩会话极不划算，见上游 v2.3.0 说明）
 - id: save-token

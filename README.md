@@ -1,6 +1,6 @@
 # dsh-kit
 
-一套经过日常高强度使用打磨的 **DeepSeek Harness（DSH）插件配置套件**：38 个依赖
+一套经过日常高强度使用打磨的 **DeepSeek Harness（DSH）插件配置套件**：39 个依赖
 （官方 Computer/Browser Use、精选第三方插件、15 个自研/改版插件）、全部挂载与
 补丁脚本，一条命令装进任何 profile。
 
@@ -9,7 +9,7 @@
 | 类别 | 插件 |
 |---|---|
 | 自研 · UI/动效 | `dsh-plugin-polish`（动效统一 + `:has()` 替换引擎）、`dsh-claude-theme`、`dsh-plugin-github-code-theme`、`dsh-smooth-cursor/stream`（第三方） |
-| 自研 · 功能 | `dsh-todo-float`、`@jipika/dsh-workspace-files`、`dsh-memguard`（内存守卫）、`dsh-proxy-autoswitch`、`dsh-infinite-gen-4`、`dsh-lan-loopback-compat`、`dsh-computer-use-compat` |
+| 自研 · 功能 | `dsh-todo-float`、`@jipika/dsh-workspace-files`、`dsh-memguard`（内存守卫）、`dsh-proxy-autoswitch`、`dsh-infinite-gen-4`、`dsh-lan-loopback-compat`、`dsh-computer-use-compat`、`dsh-preset-hotswap`（会话头热切模式） |
 | 自研 · 工具 | `@jipika/dsh-memory`（长期记忆注入）、`@jipika/dsh-think-ux`、`dsh-ui-fixes`、`dsh-skill-mcp-panel`（改版）、`@noob-stupid/dsh-plugin-console`（改版：插件中心独立分栏） |
 | 官方 | Computer Use 全家桶、Browser Use（Electron 下默认禁用）、Schedule/time-context |
 | 第三方 | `dsh-better-sidebar`、`dsh-context`、`dsh-config-manager`、`dsh-rewind-plugin`、`dsh-plugin-save-token`、`dshmarket`、`@liustack/modsearch` 等 |
