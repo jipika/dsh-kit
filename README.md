@@ -14,7 +14,9 @@
 | 官方 | Computer Use 全家桶、Browser Use（Electron 下默认禁用）、Schedule/time-context |
 | 第三方 | `dsh-better-sidebar`、`dsh-context`、`dsh-config-manager`、`dsh-rewind-plugin`、`dsh-plugin-save-token`、`dshmarket`、`@liustack/modsearch` 等 |
 
-## 一键安装
+## 安装
+
+**方式一：从 GitHub 装（推荐 —— 之后能 `git pull` 拿更新）**
 
 ```bash
 git clone https://github.com/jipika/dsh-kit.git
@@ -23,12 +25,22 @@ cd dsh-kit
 ./install.sh web        # 或装进任意 profile
 ```
 
+**方式二：手上是 zip 包**
+
+```bash
+unzip dsh-kit-*.zip && cd dsh-kit
+bash install.sh         # 解压后执行位可能丢失，用 bash 跑最稳
+```
+
+前提相同：**本机已装 DeepSeek Harness Desktop**（脚本直接用它的 node/pnpm 运行时）。
+zip 包里不含 `.git`，因此之后收不到 `git pull` 更新——想要更新就改用方式一。
+
 脚本会自动探测 DSH 自带的 node/pnpm（没有则要求系统装 Node 20+），然后：
 
 1. **幂等合并** `package.json`（依赖 + bundles + postinstall）、`cordis.patch.yml`
    （逐块检测，缺哪块补哪块）、`scripts/` 补丁脚本、`pnpm-workspace.yaml`
    （allowBuilds 白名单）——不覆盖你已有的版本与配置；
-2. `pnpm install` 安装全部依赖（首次需联网）；
+2. `pnpm install` 安装全部依赖（首次需联网，`github:` 依赖会现场 clone）；
 3. **重启 DeepSeek Harness** 生效。
 
 ## 不包含什么（有意为之）
