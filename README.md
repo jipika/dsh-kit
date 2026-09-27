@@ -1,6 +1,6 @@
 # dsh-kit
 
-一套经过日常高强度使用打磨的 **DeepSeek Harness（DSH）插件配置套件**：37 个依赖
+一套经过日常高强度使用打磨的 **DeepSeek Harness（DSH）插件配置套件**：38 个依赖
 （官方 Computer/Browser Use、精选第三方插件、15 个自研/改版插件）、全部挂载与
 补丁脚本，一条命令装进任何 profile。
 

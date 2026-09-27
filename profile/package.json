@@ -6,6 +6,7 @@
     "@deepseek-ai/dsh-computer-use": "0.1.6-alpha.1",
     "@deepseek-ai/dsh-experimental-browser-use-playwright-mcp": "0.1.6-alpha.1",
     "@deepseek-ai/dsh-experimental-computer-use-cua-driver-native": "0.1.6-alpha.1",
+    "@deepseek-ai/schemastery": "3.18.4",
     "@dhicoc/dsh-reverse-skill": "1.0.5",
     "@jipika/dsh-memory": "github:jipika/dsh-memory",
     "@jipika/dsh-think-ux": "github:jipika/dsh-think-ux",
@@ -18,7 +19,7 @@
     "dsh-code-nav": "github:AnakinCao/dsh-code-nav",
     "dsh-computer-use-compat": "github:jipika/dsh-computer-use-compat",
     "dsh-config-manager": "0.1.64",
-    "dsh-context": "^0.56.2",
+    "dsh-context": "^0.57.0",
     "dsh-drag-and-drop": "^0.1.6",
     "dsh-ego-browser": "git+https://github.com/Fisfzy/ego-browser.git",
     "dsh-github": "0.1.0",
@@ -37,7 +38,7 @@
     "dsh-ui-harmonizer": "^0.8.3",
     "dsh-video-preview": "^0.1.4",
     "dsh-web-low-motion": "^0.4.5",
-    "dshmarket": "^1.66.1",
+    "dshmarket": "^1.66.2",
     "dsh-proxy-autoswitch": "github:jipika/dsh-proxy-autoswitch"
   },
   "scripts": {
