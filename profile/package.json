@@ -10,15 +10,15 @@
     "@jipika/dsh-memory": "github:jipika/dsh-memory",
     "@jipika/dsh-think-ux": "github:jipika/dsh-think-ux",
     "@jipika/dsh-workspace-files": "github:jipika/dsh-workspace-files",
-    "@liustack/modsearch": "5.10.4",
+    "@liustack/modsearch": "5.10.5",
     "@michengai/dsh-archive-manager": "1.0.5",
     "@noob-stupid/dsh-plugin-console": "github:jipika/dsh-plugin-console",
     "dsh-better-sidebar": "0.21.1",
     "dsh-claude-theme": "github:jipika/dsh-claude-theme",
     "dsh-code-nav": "github:AnakinCao/dsh-code-nav",
     "dsh-computer-use-compat": "github:jipika/dsh-computer-use-compat",
-    "dsh-config-manager": "0.1.63",
-    "dsh-context": "^0.55.0",
+    "dsh-config-manager": "0.1.64",
+    "dsh-context": "^0.56.2",
     "dsh-drag-and-drop": "^0.1.6",
     "dsh-ego-browser": "git+https://github.com/Fisfzy/ego-browser.git",
     "dsh-github": "0.1.0",
@@ -37,11 +37,11 @@
     "dsh-ui-harmonizer": "^0.8.3",
     "dsh-video-preview": "^0.1.4",
     "dsh-web-low-motion": "^0.4.5",
-    "dshmarket": "^1.65.1",
+    "dshmarket": "^1.66.1",
     "dsh-proxy-autoswitch": "github:jipika/dsh-proxy-autoswitch"
   },
   "scripts": {
-    "postinstall": "node -e \"const f='node_modules/node-pty/prebuilds/darwin-arm64/spawn-helper';try{require('node:fs').chmodSync(f,0o755);console.log('spawn-helper +x ok')}catch(e){console.log('spawn-helper chmod skipped:',e.code)}\" && node scripts/patch-harmonizer.cjs && node scripts/patch-context-units.cjs && node scripts/patch-smooth-stream-icons.cjs && node scripts/patch-ego-browser-no-autotab.cjs"
+    "postinstall": "node -e \"const f='node_modules/node-pty/prebuilds/darwin-arm64/spawn-helper';try{require('node:fs').chmodSync(f,0o755);console.log('spawn-helper +x ok')}catch(e){console.log('spawn-helper chmod skipped:',e.code)}\" && node scripts/patch-harmonizer.cjs && node scripts/patch-context-units.cjs && node scripts/patch-context-balance.cjs && node scripts/patch-smooth-stream-icons.cjs && node scripts/patch-ego-browser-no-autotab.cjs"
   },
   "dsh": {
     "profile": {
